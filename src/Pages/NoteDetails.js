@@ -2,6 +2,7 @@ import React from 'react'
 import './NoteDetails.css'
 import { BiSolidTrashAlt } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 const NoteDetails = () => {
     return (
         <div className="note-container">
@@ -11,7 +12,7 @@ const NoteDetails = () => {
                 <p className="note-date font-12 text-muted me-5">last updated: 11 March 2009</p>
             </span>
             <span className="button-group">
-                <button className="btn btn-primary"><FiEdit /><span>Edit</span></button>
+                <Link to='/edit-notes'><button className="btn btn-primary"><FiEdit /><span>Edit</span></button></Link>
                 <button className="btn btn-danger"><BiSolidTrashAlt /><span>Delete</span></button>
             </span>
             <p className="description">
