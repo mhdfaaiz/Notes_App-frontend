@@ -1,22 +1,11 @@
 import React from 'react'
 import NotesCard from './NotesCard'
 
-function NotesCardContainer() {
+function NotesCardContainer({ notes }) {
     return (
         <div className="container">
             <div className="note-has-grid row">
-                <NotesCard color="green" />
-                <NotesCard color="purple" />
-                <NotesCard color="blue" />
-
-                <NotesCard color="green" />
-                <NotesCard color="purple" />
-                <NotesCard color="blue" />
-
-                <NotesCard color="green" />
-                <NotesCard color="purple" />
-                <NotesCard color="blue" />
-
+                {notes.map(note => <NotesCard key={note.id} note={note} />)}
             </div>
         </div>
     )

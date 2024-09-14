@@ -2,11 +2,11 @@ import React from 'react'
 import Filter from '../components/Filter'
 import NotesCardContainer from '../components/NotesCardContainer'
 
-const HomePage = () => {
+const HomePage = ({ notes }) => {
     return (
         <div>
             <Filter />
-            <NotesCardContainer />
+            <NotesCardContainer notes={notes} />
         </div>
     )
 }
