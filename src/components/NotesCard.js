@@ -12,7 +12,7 @@ const NotesCard = ({ note }) => {
             <div className="card card-body">
                 <span className="side-stick" style={{ backgroundColor: color }}></span>
                 <FaNoteSticky style={{ marginLeft: "auto", color: color }} />
-                <Link to='/detail-notes' style={{ textDecoration: 'none', color: 'black' }}>
+                <Link to={`/notes/${note.slug}`} style={{ textDecoration: 'none', color: 'black' }}>
                     <h5 className="note-title text-truncate w-75 mb-0" data-noteheading="Book a Ticket for Movie">{note.title} </h5>
                 </Link>
                 <p className="note-date font-12 text-muted">{FormatDate(note.updated)}</p>

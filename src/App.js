@@ -13,20 +13,30 @@ const App = () => {
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/notes/").then(res => {
-      console.log(res.data)
       setNotes(res.data)
     })
       .catch(err => {
         console.log(err.message)
       })
-  })
+  }, [])
+
+  const addnote = (data) => {
+    axios.post("http://127.0.0.1:8000/notes/", data)
+      .then(res => {
+        setNotes([...notes, data])
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(console.log(err.message))
+      })
+  }
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<MainLayout />}>
       <Route index element={<HomePage notes={notes} />} />
-      <Route path="/add-notes" element={<AddNotes />} />
+      <Route path="/add-notes" element={<AddNotes addnote={addnote} />} />
       <Route path="/edit-notes" element={<EditNotes />} />
-      <Route path="/detail-notes" element={<NoteDetails />} />
+      <Route path="/notes/:slug" element={<NoteDetails />} />
     </Route>
   ))
   return <RouterProvider router={router} />
