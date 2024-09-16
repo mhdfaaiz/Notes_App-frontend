@@ -5,7 +5,8 @@ import MainLayout from './layouts/MainLayout';
 import AddNotes from './Pages/AddNotes';
 import NoteDetails from './Pages/NoteDetails';
 import EditNotes from './Pages/EditNotes';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const App = () => {
 
@@ -24,6 +25,7 @@ const App = () => {
     axios.post("http://127.0.0.1:8000/notes/", data)
       .then(res => {
         setNotes([...notes, data])
+        toast.success("A new note has been added")
         console.log(res.data)
       })
       .catch(err => {
@@ -35,7 +37,7 @@ const App = () => {
     <Route path="/" element={<MainLayout />}>
       <Route index element={<HomePage notes={notes} />} />
       <Route path="/add-notes" element={<AddNotes addnote={addnote} />} />
-      <Route path="/edit-notes" element={<EditNotes />} />
+      <Route path="/edit-notes/:slug" element={<EditNotes />} />
       <Route path="/notes/:slug" element={<NoteDetails />} />
     </Route>
   ))

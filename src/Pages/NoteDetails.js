@@ -31,7 +31,7 @@ const NoteDetails = () => {
                 <p className="note-date font-12 text-muted me-5">last updated: {FormatDate(note.updated)}</p>
             </span>
             <span className="button-group">
-                <Link to='/edit-notes'><button className="btn btn-primary"><FiEdit /><span>Edit</span></button></Link>
+                <Link to={`/edit-notes/${slug}`}><button className="btn btn-primary"><FiEdit /><span>Edit</span></button></Link>
                 <button className="btn btn-danger"><BiSolidTrashAlt /><span>Delete</span></button>
             </span>
             <p className="description">

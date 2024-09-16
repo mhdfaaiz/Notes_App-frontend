@@ -6,7 +6,7 @@ import { FormatDate } from './FormatDate';
 
 const NotesCard = ({ note }) => {
     const body = `${note.body.split(" ").slice(0, 20).join(" ")} ...`
-    const color = note.category == "BUSINESS" ? "blue" : note.category == "PERSONAL" ? "green" : "red"
+    const color = note.category === "BUSINESS" ? "blue" : note.category === "PERSONAL" ? "green" : "red"
     return (
         <div className="col-md-4 single-note-item all-category">
             <div className="card card-body">
