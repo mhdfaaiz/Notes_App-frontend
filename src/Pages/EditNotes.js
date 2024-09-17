@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './AddNotes.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
-const EditNotes = () => {
+const EditNotes = ({ updatedNote }) => {
 
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
     const [category, setCategory] = useState("")
 
     const { slug } = useParams()
+    const navigate = useNavigate()
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/notes/${slug}`)
             .then(res => {
@@ -19,22 +20,36 @@ const EditNotes = () => {
             .catch(err => {
                 console.log(err.message)
             })
-    })
+    }, [slug]);
+
+    const updatedNoteCategory = {
+        title: title,
+        body: body,
+        category: category
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        if (!title && !body && !category) return;
+        updatedNote(updatedNoteCategory, slug)
+        navigate(`/notes/${slug}`)
+    }
 
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h5>Edit Current Note</h5>
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" className="form-label">
                         Title
                     </label>
                     <input
-                        type="email"
                         className="form-control"
                         id="exampleFormControlInput1"
                         placeholder="Enter note's title"
                         value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                     />
                 </div>
 
@@ -48,6 +63,7 @@ const EditNotes = () => {
                         rows={4}
                         placeholder="Enter note's content"
                         value={body}
+                        onChange={(e) => setBody(e.target.value)}
                     ></textarea>
                 </div>
 
@@ -55,7 +71,8 @@ const EditNotes = () => {
                     <label htmlFor="exampleFormControlTextarea1" className="form-label">
                         Note's category
                     </label>
-                    <select className="form-select" aria-label="Default select example" value={category} style={{ height: "40px" }}>
+                    <select className="form-select" aria-label="Default select example" value={category}
+                        onChange={(e) => setCategory(e.target.value)} style={{ height: "40px" }}>
                         <option value="">Pick a category</option>
                         <option value="BUSINESS">Business</option>
                         <option value="PERSONAL">Personal</option>
