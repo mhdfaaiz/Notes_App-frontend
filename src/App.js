@@ -8,6 +8,7 @@ import EditNotes from './Pages/EditNotes';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
+
 const App = () => {
 
   const [notes, setNotes] = useState([])
@@ -20,6 +21,17 @@ const App = () => {
         console.log(err.message)
       })
   }, [])
+
+  const [filterText, setFilterText] = useState("")
+
+  const handleFilterText = (val) => {
+    setFilterText(val)
+  }
+
+  const filteredNotes = filterText === "BUSINESS" ? notes.filter((note) => note.category === "BUSINESS") :
+    filterText === "PERSONAL" ? notes.filter((note) => note.category === "PERSONAL") :
+      filterText === "IMPORTANT" ? notes.filter((note) => note.category === "IMPORTANT") :
+        notes
 
   const addnote = (data) => {
     axios.post("http://127.0.0.1:8000/notes/", data)
@@ -52,7 +64,7 @@ const App = () => {
 
   const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" element={<MainLayout />}>
-      <Route index element={<HomePage notes={notes} />} />
+      <Route index element={<HomePage notes={filteredNotes} handleFilterText={handleFilterText} />} />
       <Route path="/add-notes" element={<AddNotes addnote={addnote} />} />
       <Route path="/edit-notes/:slug" element={<EditNotes updatedNote={updatedNote} />} />
       <Route path="/notes/:slug" element={<NoteDetails deleteNote={deleteNote} />} />

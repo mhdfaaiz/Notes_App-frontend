@@ -2,10 +2,10 @@ import React from 'react'
 import Filter from '../components/Filter'
 import NotesCardContainer from '../components/NotesCardContainer'
 
-const HomePage = ({ notes }) => {
+const HomePage = ({ notes, handleFilterText }) => {
     return (
         <div>
-            <Filter />
+            <Filter handleFilterText={handleFilterText} />
             <NotesCardContainer notes={notes} />
         </div>
     )
