@@ -12,6 +12,29 @@ import { toast } from 'react-toastify';
 const App = () => {
 
   const [notes, setNotes] = useState([])
+  const [searchText, setSearchText] = useState("")
+
+  const handleSearchText = (val) => {
+    setSearchText(val)
+  }
+
+  useEffect(() => {
+    if (searchText.length === 0) {
+      axios.get('http://127.0.0.1:8000/notes/')
+        .then(res => {
+          setNotes(res.data);
+        })
+        .catch(err => console.log(err.message));
+      return
+    }
+    if (searchText.length < 3) return;
+
+    axios.get(`http://127.0.0.1:8000/notes-search/?search=${searchText}`)
+      .then(res => {
+        setNotes(res.data)
+      })
+      .catch(err => console.log(err.message))
+  }, [searchText])
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/notes/").then(res => {
@@ -63,8 +86,8 @@ const App = () => {
   }
 
   const router = createBrowserRouter(createRoutesFromElements(
-    <Route path="/" element={<MainLayout />}>
-      <Route index element={<HomePage notes={filteredNotes} handleFilterText={handleFilterText} />} />
+    <Route path="/" element={<MainLayout searchText={searchText} handleSearchText={handleSearchText} />}>
+      <Route index element={<HomePage notes={filteredNotes} handleFilterText={handleFilterText} searchText={searchText} />} />
       <Route path="/add-notes" element={<AddNotes addnote={addnote} />} />
       <Route path="/edit-notes/:slug" element={<EditNotes updatedNote={updatedNote} />} />
       <Route path="/notes/:slug" element={<NoteDetails deleteNote={deleteNote} />} />
