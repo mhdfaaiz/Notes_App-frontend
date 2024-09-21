@@ -33,7 +33,7 @@ function navbar({ searchText, handleSearchText }) {
 
                     <Link to="/add-notes" style={{ textDecoration: "none" }}>
                         <button
-                            className="btn btn-outline-primary btn-md"
+                            className=" add btn btn-outline-primary btn-md"
                             type="button"
 
                         >

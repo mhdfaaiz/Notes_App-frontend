@@ -37,13 +37,15 @@ const App = () => {
   }, [searchText])
 
   useEffect(() => {
+
     axios.get("http://127.0.0.1:8000/notes/").then(res => {
       setNotes(res.data)
     })
       .catch(err => {
         console.log(err.message)
       })
-  }, [])
+  }
+    , [])
 
   const [filterText, setFilterText] = useState("")
 
