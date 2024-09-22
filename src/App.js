@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+import { Route, createHashRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import MainLayout from './layouts/MainLayout';
 import AddNotes from './Pages/AddNotes';
@@ -87,8 +87,8 @@ const App = () => {
       .catch(err => console.log(err.message))
   }
 
-  const router = createBrowserRouter(createRoutesFromElements(
-    <Route basename="/notesapp-react" path="/" element={<MainLayout searchText={searchText} handleSearchText={handleSearchText} />}>
+  const router = createHashRouter(createRoutesFromElements(
+    <Route path="/" element={<MainLayout searchText={searchText} handleSearchText={handleSearchText} />}>
       <Route index element={<HomePage notes={filteredNotes} handleFilterText={handleFilterText} searchText={searchText} />} />
       <Route path="/add-notes" element={<AddNotes addnote={addnote} />} />
       <Route path="/edit-notes/:slug" element={<EditNotes updatedNote={updatedNote} />} />
