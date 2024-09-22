@@ -22,7 +22,7 @@ const NoteDetails = ({ deleteNote }) => {
     }
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/notes/${slug}`)
+        axios.get(`https://f-notes-django-1.onrender.com/notes/${slug}`)
             .then(res => {
                 setNote(res.data)
                 console.log(res.data)

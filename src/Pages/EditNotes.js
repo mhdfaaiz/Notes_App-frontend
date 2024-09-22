@@ -11,7 +11,7 @@ const EditNotes = ({ updatedNote }) => {
     const { slug } = useParams()
     const navigate = useNavigate()
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/notes/${slug}`)
+        axios.get(`https://f-notes-django-1.onrender.com/notes/${slug}`)
             .then(res => {
                 setTitle(res.data.title)
                 setBody(res.data.body)

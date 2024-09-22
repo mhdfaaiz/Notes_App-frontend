@@ -20,7 +20,7 @@ const App = () => {
 
   useEffect(() => {
     if (searchText.length === 0) {
-      axios.get('http://127.0.0.1:8000/notes/')
+      axios.get('https://f-notes-django-1.onrender.com/notes/')
         .then(res => {
           setNotes(res.data);
         })
@@ -29,7 +29,7 @@ const App = () => {
     }
     if (searchText.length < 3) return;
 
-    axios.get(`http://127.0.0.1:8000/notes-search/?search=${searchText}`)
+    axios.get(`https://f-notes-django-1.onrender.com/notes-search/?search=${searchText}`)
       .then(res => {
         setNotes(res.data)
       })
@@ -38,7 +38,7 @@ const App = () => {
 
   useEffect(() => {
 
-    axios.get("http://127.0.0.1:8000/notes/").then(res => {
+    axios.get("https://f-notes-django-1.onrender.com/notes/").then(res => {
       setNotes(res.data)
     })
       .catch(err => {
@@ -59,7 +59,7 @@ const App = () => {
         notes
 
   const addnote = (data) => {
-    axios.post("http://127.0.0.1:8000/notes/", data)
+    axios.post("https://f-notes-django-1.onrender.com/notes/", data)
       .then(res => {
         setNotes([...notes, res.data])
         toast.success("A new note has been added")
@@ -71,7 +71,7 @@ const App = () => {
   }
 
   const updatedNote = (data, slug) => {
-    axios.put(`http://127.0.0.1:8000/notes/${slug}/`, data)
+    axios.put(`https://f-notes-django-1.onrender.com/notes/${slug}/`, data)
       .then(res => {
         console.log(res.data)
         toast.success("Note updated successfully")
@@ -80,7 +80,7 @@ const App = () => {
   }
 
   const deleteNote = (slug) => {
-    axios.delete(`http://127.0.0.1:8000/notes/${slug}/`)
+    axios.delete(`https://f-notes-django-1.onrender.com/notes/${slug}/`)
       .then(res => {
         setNotes(notes.filter(note => note.slug !== slug));
       })
