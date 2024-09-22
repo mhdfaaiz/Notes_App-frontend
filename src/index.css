@@ -177,18 +177,17 @@ body {
   }
 
   .body {
-    overflow: hidden;
     position: fixed;
     height: 100%;
-    width: 100%;
   }
 
   .navbar {
     width: 100%;
   }
 
-  #root {
+  .main {
     width: 100%;
+    overflow: hidden;
   }
 
 
