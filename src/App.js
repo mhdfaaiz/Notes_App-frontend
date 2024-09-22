@@ -88,7 +88,7 @@ const App = () => {
   }
 
   const router = createBrowserRouter(createRoutesFromElements(
-    <Route path="/" element={<MainLayout searchText={searchText} handleSearchText={handleSearchText} />}>
+    <Route basename="/notesapp-react" path="/" element={<MainLayout searchText={searchText} handleSearchText={handleSearchText} />}>
       <Route index element={<HomePage notes={filteredNotes} handleFilterText={handleFilterText} searchText={searchText} />} />
       <Route path="/add-notes" element={<AddNotes addnote={addnote} />} />
       <Route path="/edit-notes/:slug" element={<EditNotes updatedNote={updatedNote} />} />
